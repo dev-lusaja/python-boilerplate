@@ -8,6 +8,7 @@ services:
        - '80:8000'
      environment:
        VENV_DIR: /$VENV_DIR
+       DEVELOPMENT: "True"
      volumes:
        - './$APP_DIR:/$APP_DIR'
        - './$VENV_DIR:/$VENV_DIR'
