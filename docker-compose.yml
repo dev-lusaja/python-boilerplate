@@ -8,14 +8,13 @@ services:
        - '80:8000'
      environment:
        VENV_DIR: /$VENV_DIR
-       DEVELOPMENT: "True"
      volumes:
        - './$APP_DIR:/$APP_DIR'
        - './$VENV_DIR:/$VENV_DIR'
        - './wait-for-it.sh:/wait-for-it.sh'
      depends_on:
       - mysql
-     entrypoint: /wait-for-it.sh -t 10 mysql:3306 -- /resources/runservices.sh
+     entrypoint: /wait-for-it.sh -t 30 mysql:3306 -- /resources/runservices.sh
 
    mysql:
      container_name: mysql

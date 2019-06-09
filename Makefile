@@ -20,7 +20,7 @@ include makefiles/container.mk
 include makefiles/virtualenv.mk
 
 ## DEVELOPER TARGETS ##
-development: build venv-create venv-install-lib up ## Prepare the project for development: make development
+development: runtime-image venv-create venv-install-lib container-up ## Prepare the project for development: make development
 	@echo "The development environment is ready and running"
 
 generate-requirements: ## Generate requirements.txt: make generate-requirements
@@ -31,16 +31,16 @@ generate-requirements: ## Generate requirements.txt: make generate-requirements
 		--entrypoint=/resources/venv.sh \
 		${IMAGE_RUNTIME} pip3.5 freeze > ${APP_DIR}/requirements.txt
 
-clean-cache: ## Remove python cache files: make clean-cache
-	@sudo find . | grep -E "(__pycache__|\.pyc|\.pyo$|.pytest_cache)" | xargs rm -rf
-
-test: ## Run the unit tests: make test
+development-unit-test: ## Run the unit tests: make development-unit-test
 	@docker container run --workdir "/${APP_DIR}" --rm -it \
 		-v "${PWD}/${VENV_DIR}":/${VENV_DIR} \
 		-v "${PWD}/${APP_DIR}":/${APP_DIR} \
 		-e VENV_DIR=/${VENV_DIR} \
 		--entrypoint=/resources/venv.sh \
-		${IMAGE_RUNTIME} pytest
+		${IMAGE_RUNTIME} pytest -v
+
+clean-cache: ## Remove python cache files: make clean-cache
+	@sudo sh -c 'find . | grep -E "(__pycache__|\.pyc|\.pyo$|.pytest_cache)" | xargs rm -rf'
 
 ## HELP TARGET ##
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # for development mode
-if [[ ${DEVELOPMENT} ]]; then
+if [[ ${VENV_DIR} ]]; then
     source $VENV_DIR/bin/activate
     echo "Development mode was enabled, this mode use virtualenv"
 fi
