@@ -8,7 +8,7 @@ MarkupSafe==1.1.1
 marshmallow==2.19.2
 mysql-connector-python==8.0.16
 peewee==3.9.5
-protobuf==3.7.1
+protobuf==3.18.3
 PyMySQL==0.9.3
 python-dotenv==0.10.2
 six==1.12.0
